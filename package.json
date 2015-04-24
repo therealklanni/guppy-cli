@@ -1,0 +1,36 @@
+{
+  "name": "guppy-cli",
+  "version": "0.1.0",
+  "description": "Commandline functionality for git-guppy",
+  "main": "index.js",
+  "bin": {
+    "guppy": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/therealklanni/guppy-cli.git"
+  },
+  "keywords": [
+    "guppy"
+  ],
+  "author": {
+    "name": "Kevin Lanni",
+    "url": "https://github.com/therealklanni"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/therealklanni/guppy-cli/issues"
+  },
+  "homepage": "https://github.com/therealklanni/guppy-cli",
+  "dependencies": {
+    "map-stream": "0.0.5",
+    "shelljs": "^0.4.0",
+    "vinyl-fs": "^1.0.0"
+  },
+  "devDependencies": {
+    "proxyquire": "^1.4.0"
+  }
+}

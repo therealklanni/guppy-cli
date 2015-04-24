@@ -3,6 +3,7 @@
 require('shelljs/global');
 var fs = require('vinyl-fs');
 var map = require('map-stream');
+var async = require('async');
 var path = require('path');
 
 var hooks = [
@@ -26,6 +27,7 @@ var hooks = [
 ];
 
 module.exports.install = install;
+module.exports.installAll = installAll;
 
 function install(hook, dest, cb) {
   cb = cb || dest;
@@ -35,11 +37,12 @@ function install(hook, dest, cb) {
 
   if (hooks.indexOf(hook) === -1) cb(new Error('Invalid hook name.'));
 
-  dest = (typeof dest === 'function' ? null : dest ||
+  dest = ((typeof dest === 'function' ? null : dest) ||
     exec('git rev-parse --show-toplevel')
       .output.slice(0, -1) + '/.git/hooks/');
 
   var destHook = path.join(dest, hook);
+
   if (test('-f', destHook)) {
     var bakDest = destHook + '.guppy';
 
@@ -54,7 +57,18 @@ function install(hook, dest, cb) {
       next(null, file);
     }))
     .pipe(fs.dest(dest))
-    .on('end', function () {
+    .on('finish', function () {
       cb(null, destHook);
     });
+}
+
+function installAll(dest, cb) {
+  async.parallel(
+    hooks.map(function (hook) {
+      return function (next) {
+        return install(hook, dest, next);
+      };
+    }),
+    cb
+  );
 }

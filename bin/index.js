@@ -14,6 +14,9 @@ var yargs = require('yargs')
   .example('$0 pre-commit')
   .example('$0 pre-commit -d some/where')
   .example('$0 all')
+  .version(function() {
+    return require('../package').version;
+  })
   .epilogue('Existing git-hooks will be backed up the first time. If a backup ' +
     'already exists, it will not be overwritten.' +
     '\n\nhttps://github.com/therealklanni/guppy-cli');

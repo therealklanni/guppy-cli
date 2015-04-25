@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "faucet": "0.0.1",
-    "git-guppy": "^0.3.0",
+    "git-guppy": "git+https://github.com/therealklanni/git-guppy#1.0",
     "gulp": "^3.8.11",
     "gulp-filter": "^2.0.2",
     "gulp-jshint": "^1.10.0",

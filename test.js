@@ -1,3 +1,6 @@
+/* exported mv */
+'use strict';
+
 var test = require('tape');
 var sh = require('shelljs');
 var proxy = require('proxyquire');
@@ -14,7 +17,7 @@ var mv = function(){};
 test('install', function (t) {
   t.plan(1);
 
-  gup.install('pre-commit', './', function (err, path) {
+  gup.install('pre-commit', './', function () {
     t.equal(sh.test('-f', './pre-commit'), true, 'should create pre-commit hookfile');
     sh.rm('./pre-commit');
   });

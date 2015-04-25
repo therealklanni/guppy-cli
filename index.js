@@ -1,3 +1,4 @@
+/* global chmod */
 'use strict';
 
 require('shelljs/global');
@@ -25,9 +26,6 @@ var hooks = [
   'prepare-commit-msg',
   'update'
 ];
-
-module.exports.install = install;
-module.exports.installAll = installAll;
 
 function install(hook, dest, cb) {
   cb = cb || dest;
@@ -75,3 +73,6 @@ function installAll(dest, cb) {
     cb
   );
 }
+
+module.exports.install = install;
+module.exports.installAll = installAll;

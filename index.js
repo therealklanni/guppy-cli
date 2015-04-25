@@ -58,6 +58,7 @@ function install(hook, dest, cb) {
     }))
     .pipe(fs.dest(dest))
     .on('finish', function () {
+      chmod('u+x', destHook);
       cb(null, destHook);
     });
 }

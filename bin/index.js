@@ -2,11 +2,10 @@
 'use strict';
 
 var gup = require('../');
-var argv = require('yargs')
+var yargs = require('yargs')
   .usage('Usage: $0 <hookname>|all [-d <path>]')
   .command('hookname', 'Name of the git-hook to install, for a list, see --hooks')
   .command('all', 'Install all available git-hooks (use caution)')
-  .demand(1)
   .alias('d', 'dest')
   .describe('d', 'Destination path for git-hook (default: ./.git/hooks/)')
   .describe('hooks', 'Print a complete list of git-hooks')
@@ -17,8 +16,8 @@ var argv = require('yargs')
   .example('$0 all')
   .epilogue('Existing git-hooks will be backed up the first time. If a backup ' +
     'already exists, it will not be overwritten.' +
-    '\n\nhttps://github.com/therealklanni/guppy-cli')
-  .argv;
+    '\n\nhttps://github.com/therealklanni/guppy-cli');
+var argv = yargs.argv;
 
 var hooks = '  applypatch-msg, commit-msg, post-applypatch, post-checkout, ' +
   'post-commit,\n  post-merge, post-receive, post-rewrite, post-update, ' +
@@ -47,6 +46,11 @@ if (argv.dest) {
 
 var hook = argv._[0];
 
+if (!hook) {
+  yargs.showHelp();
+  exit(2);
+}
+
 if (hook.toLowerCase() === 'all') {
   gup.installAll(dest, function (err, results) {
     if (err) {
@@ -69,5 +73,5 @@ if (hook.toLowerCase() === 'all') {
   });
 } else {
   console.error('fatal: Invalid hook name: ' + hook);
-  exit(2);
+  exit(5);
 }

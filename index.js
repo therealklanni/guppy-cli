@@ -32,9 +32,8 @@ module.exports.installAll = installAll;
 function install(hook, dest, cb) {
   cb = cb || dest;
 
-  if (!cb) throw new Error('Callback must be supplied.');
-  if (typeof cb !== 'function') throw new Error('Callback must be a function.');
-
+  if (!cb) cb(new Error('Callback must be supplied.'));
+  if (typeof cb !== 'function') cb(new Error('Callback must be a function.'));
   if (hooks.indexOf(hook) === -1) cb(new Error('Invalid hook name.'));
 
   dest = ((typeof dest === 'function' ? null : dest) ||
@@ -60,6 +59,9 @@ function install(hook, dest, cb) {
     .on('finish', function () {
       chmod('u+x', destHook);
       cb(null, destHook);
+    })
+    .on('error', function (err) {
+      cb(err);
     });
 }
 

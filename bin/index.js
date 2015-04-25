@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* global error */
 'use strict';
 
 var gup = require('../');
@@ -25,7 +26,7 @@ var argv = yargs.argv;
 var hooks = '  applypatch-msg, commit-msg, post-applypatch, post-checkout, ' +
   'post-commit,\n  post-merge, post-receive, post-rewrite, post-update, ' +
   'pre-applypatch,\n  pre-auto-gc, pre-commit, pre-push, pre-rebase, ' +
-  'pre-receive,\n  prepare-commit-msg, update'
+  'pre-receive,\n  prepare-commit-msg, update';
 
 if (argv.hooks) {
   console.log('Available git-hooks are:\n' + hooks);
@@ -35,7 +36,7 @@ if (argv.hooks) {
 var dest;
 
 if (argv.dest) {
-  dest = argv.dest
+  dest = argv.dest;
 } else {
   var topLevel = exec('git rev-parse --show-toplevel', { silent: true })
     .output.slice(0, -1);
@@ -55,7 +56,7 @@ if (!hook) {
 }
 
 if (hook.toLowerCase() === 'all') {
-  gup.installAll(dest, function (err, results) {
+  gup.installAll(dest, function (err) {
     if (err) {
       console.error('fatal: ' + err.message);
       exit(3);

@@ -50,7 +50,7 @@ function install(hook, dest, cb) {
     }
   }
 
-  return fs.src('./scripts/hookfile')
+  return fs.src(path.join(__dirname, 'scripts/hookfile'))
     .pipe(map(function(file, next) {
       file.path = file.path.replace('hookfile', hook);
       next(null, file);

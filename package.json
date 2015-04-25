@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "faucet": "0.0.1",
-    "guppy-pre-commit": "^0.1.0",
     "proxyquire": "^1.4.0",
     "tape": "^4.0.0"
   }

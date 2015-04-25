@@ -7,7 +7,8 @@
     "guppy": "./bin/index.js"
   },
   "scripts": {
-    "test": "faucet test.js"
+    "test": "faucet test.js",
+    "postinstall": "./bin/index.js pre-commit"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,11 @@
   },
   "devDependencies": {
     "faucet": "0.0.1",
+    "git-guppy": "^0.3.0",
+    "gulp": "^3.8.11",
+    "gulp-filter": "^2.0.2",
+    "gulp-jshint": "^1.10.0",
+    "jshint-stylish": "^1.0.1",
     "proxyquire": "^1.4.0",
     "tape": "^4.0.0"
   }

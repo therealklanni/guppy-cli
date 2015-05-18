@@ -4,12 +4,15 @@
 var spawn = require('child_process').spawn;
 var cwd = process.env.PWD || process.cwd();
 
-var hookName = process.argv[1].split('/').pop();
+var path = require('path');
+var hookName = process.argv[1].split(path.sep).pop();
 var restArgs = process.argv.slice(2).join('\u263a');
 
 process.env.HOOK_ARGS = restArgs;
 
-var hook = spawn('gulp', [hookName], {
+var gulp = (process.platform === 'win32' ? 'gulp.cmd' : 'gulp');
+
+var hook = spawn(gulp, [hookName], {
   stdio: 'inherit',
   cwd: cwd
 });

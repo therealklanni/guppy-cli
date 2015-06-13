@@ -5,7 +5,7 @@
 var gup = require('../');
 var yargs = require('yargs')
   .usage('Usage: $0 <hookname>|all [-d <path>]')
-  .command('hookname', 'Name of the git-hook to install, for a list, see --hooks')
+  .command('hookname', 'Install a git-hook by name, for a list, see --hooks')
   .command('all', 'Install all available git-hooks (use caution)')
   .alias('d', 'dest')
   .describe('d', 'Destination path for git-hook (default: ./.git/hooks/)')

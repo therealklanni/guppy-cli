@@ -45,11 +45,11 @@ if (argv.dest) {
   if(test('-f', topLevel + '/.git')){
     // this is a sub module
     var buf = fs.readFileSync(topLevel + '/.git', "utf8").trim();
-    if(buf.substr(0,6) == 'gitdir'){
+    if(buf.substr(0,6) === 'gitdir'){
       topLevel = topLevel + '/' + buf.substr(8).trim();
     }
     dest = topLevel + '/hooks/';
-  }else{
+  } else {
     dest = topLevel + '/.git/hooks/';
   }
 

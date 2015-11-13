@@ -2,6 +2,8 @@
 /* global error */
 'use strict';
 
+require('shelljs/global');
+var fs = require("fs");
 var gup = require('../');
 var yargs = require('yargs')
   .usage('Usage: $0 <hookname>|all [-d <path>]')
@@ -40,7 +42,16 @@ if (argv.dest) {
 } else {
   var topLevel = exec('git rev-parse --show-toplevel', { silent: true })
     .output.slice(0, -1);
-  dest = topLevel + '/.git/hooks/';
+  if (test('-f', topLevel + '/.git')) {
+    // this is a sub module
+    var buf = fs.readFileSync(topLevel + '/.git', "utf8").trim();
+    if (buf.substr(0,6) === 'gitdir') {
+      topLevel = topLevel + '/' + buf.substr(8).trim();
+    }
+    dest = topLevel + '/hooks/';
+  } else {
+    dest = topLevel + '/.git/hooks/';
+  }
 
   if (error()) {
     console.error('fatal: Not a git repository (or any of the parent directories): .git');

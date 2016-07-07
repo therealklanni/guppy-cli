@@ -2,6 +2,7 @@
 'use strict';
 
 var spawn = require('child_process').spawn;
+var execSync = require('child_process').execSync;
 var cwd = process.env.PWD || process.cwd();
 
 var path = require('path');
@@ -11,8 +12,9 @@ var restArgs = process.argv.slice(2).join('\u263a');
 process.env.HOOK_ARGS = restArgs;
 
 var gulp = (process.platform === 'win32' ? 'gulp.cmd' : 'gulp');
+var dir = execSync('npm bin gulp').toString().trim();
 
-var hook = spawn(gulp, [hookName], {
+var hook = spawn(path.join(dir, gulp), [hookName], {
   stdio: 'inherit',
   cwd: cwd
 });

@@ -1,6 +1,6 @@
 {
   "name": "guppy-cli",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Commandline functionality for git-guppy",
   "main": "index.js",
   "bin": {

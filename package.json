@@ -30,7 +30,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "map-stream": "0.0.6",
-    "shelljs": "^0.5.3",
+    "shelljs": "^0.7.5",
     "vinyl-fs": "^2.4.3",
     "yargs": "^3.32.0"
   },

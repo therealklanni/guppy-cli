@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/therealklanni/guppy-cli",
   "dependencies": {
-    "async": "^1.5.2",
+    "async": "^2.3.0",
     "map-stream": "0.0.6",
     "shelljs": "^0.5.3",
     "vinyl-fs": "^2.4.3",
